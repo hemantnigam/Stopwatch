@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <title>Stopwatch</title>
+    <style>
+        body{
+            padding: 0px;
+            margin: 0px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .container{            
+            background: linear-gradient(#189a9e,rgba(18, 181, 202, 0.726));
+            height: 100vh;
+            
+        }
+        .timesection{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 70vh;
+        }
+        .min{
+            font-size: 80px;
+            padding: 5px;
+        }
+        .sec{
+            font-size: 50px;
+            padding: 5px;
+        }
+        .fas{
+            font-size: 7em;
+        }
+        .fa-stop-circle{
+            display: none;
+        }
+        .heading{            
+            text-align: center;
+            font-size: 80px;
+            font-weight: bold;
+        }
+    </style>
+    <script defer>
+        var interval;
+        function start(){
+            let start=document.querySelector('.fa-play-circle');
+            let stop=document.querySelector('.fa-stop-circle');
+            
+            start.style.display='none';
+            stop.style.display='flex';
+
+            let sec=document.querySelector('.sec');
+            let min=document.querySelector('.min');
+            var s=0;
+            var m=0;
+            interval=setInterval(()=>{
+                sec.textContent=`${s++} s`;
+                if(s>59){
+                    min.textContent=++m;
+                    s=0;
+                }
+            },100)
+        }
+        function stop(){
+            let start=document.querySelector('.fa-play-circle');
+            let stop=document.querySelector('.fa-stop-circle');            
+
+            start.style.display='flex';
+            stop.style.display='none';
+            clearInterval(interval);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">                
+        <div class="heading">
+            Stopwatch
+        </div>
+        <div class="timesection">
+                <div class="time"><span class="min">0</span><span class="sec">00</span></div>
+                <div class="icon">
+                    <i class="fas fa-play-circle" onclick="start()"></i>            
+                    <i class="fas fa-stop-circle" onclick="stop()"></i>
+                </div>
+        </div>
+        
+    </div>
+</body>
+</html>
